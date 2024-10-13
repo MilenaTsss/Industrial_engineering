@@ -9,7 +9,6 @@ COPY gradle/ gradle/
 COPY gradlew gradlew
 COPY build.gradle.kts settings.gradle.kts ./
 COPY src/ src/
-COPY gradle/ gradlew build.gradle.kts settings.gradle.kts src/ ./
 
 # Build the project
 RUN ./gradlew build --no-daemon
