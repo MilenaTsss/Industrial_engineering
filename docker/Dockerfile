@@ -5,6 +5,10 @@ FROM gradle:7.6.1-jdk17 AS build
 WORKDIR /app
 
 # Copy only the necessary files for the build
+COPY gradle/ gradle/
+COPY gradlew gradlew
+COPY build.gradle.kts settings.gradle.kts ./
+COPY src/ src/
 COPY gradle/ gradlew build.gradle.kts settings.gradle.kts src/ ./
 
 # Build the project
