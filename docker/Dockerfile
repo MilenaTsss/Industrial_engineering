@@ -11,6 +11,7 @@ COPY build.gradle.kts settings.gradle.kts ./
 COPY src/ src/
 
 # Build the project
+RUN chmod +x gradlew
 RUN ./gradlew build --no-daemon
 
 # Specify the base image for running the application
