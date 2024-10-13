@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version "1.9.23"
-    id("com.palantir.docker") version "0.36.0"
+    application
 }
 
 group = "org.hse"
@@ -11,12 +11,24 @@ repositories {
 }
 
 dependencies {
-//    testImplementation(kotlin("test"))
+    implementation(kotlin("stdlib"))
+    testImplementation(kotlin("test"))
 }
 
-//tasks.test {
-//    useJUnitPlatform()
-//}
+tasks.test {
+    useJUnitPlatform()
+}
+
 kotlin {
-    jvmToolchain(19)
+    jvmToolchain(17)
+}
+
+application {
+    mainClass.set("org.hse.MainKt")
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "org.hse.MainKt"
+    }
 }
