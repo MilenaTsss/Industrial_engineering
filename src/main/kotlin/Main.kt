@@ -5,6 +5,7 @@ import java.lang.Thread.sleep
 
 fun main() {
     while (true) {
-        sleep(5_000)
+        sleep(10_000)
+        println("Slept")
     }
 }
