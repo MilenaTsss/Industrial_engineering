@@ -20,6 +20,8 @@ FROM openjdk:17-jdk-slim
 # Set the working directory
 WORKDIR /app
 
+EXPOSE ${APP_PORT}
+
 # Copy the compiled application from the previous stage
 COPY --from=build /app/build/libs/*.jar app.jar
 

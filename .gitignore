@@ -12,3 +12,24 @@ build/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### Kotlin ###
+.kotlin
+
+## Environment ##
+.env
+
+## Requests ##
+*.http
