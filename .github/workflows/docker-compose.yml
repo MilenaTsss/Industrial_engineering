@@ -1,0 +1,39 @@
+name: Docker Compose CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-run-docker-compose:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create .env for app
+        run: |
+          echo "APP_PORT=${{ secrets.APP_PORT }}" >> .env
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+
+      - name: Run Docker Compose
+        run: |
+          # Build and run the containers in detached mode
+          docker compose -f docker/docker-compose.yaml --env-file .env up --build -d
+          
+          # Wait for a moment to ensure the app and database are up and running
+          # sleep 20
+          # Run tests or health checks here if needed
+          # Example: docker-compose exec app ./gradlew test
+
+      - name: Tear down Docker Compose
+        if: always()
+        run: |
+          # Stop and remove containers, networks, and volumes created by `docker-compose up`
+          docker compose -f docker/docker-compose.yaml --env-file .env down -v
